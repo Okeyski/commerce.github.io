@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}{{ listing.name }}{% endblock %}
+
+{% block body %}
+ 
+<div class=" px-6 py-12 bg-gray-200 rounded-xl">
+    <h2 class="mb-12 text-xl text-center" >Watchlist</h2>
+
+<div class="grid grid-cols-3 gap-3">
+{% for list in watchlist %}
+<div>
+    <a href="{% url 'listing' list.id %}">
+        <div class="p-6 m-6 bg-[#f4f7f5] rounded-xl">
+            <img src="{{ list.image.url }}" alt="" class="rounded-xl max-w-xs">
+            <h3 class="text-2xl">{{ list.name }}</h3>
+            <p>${{ list.price }}</p>
+            <p>Created {{ list.created_at}}</p>
+
+        </div>
+    </a>
+</div>
+{% endfor %}
+</div>
+</div>
+
+{% endblock %}

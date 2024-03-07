@@ -1,0 +1,21 @@
+{% extends "auctions/layout.html" %}
+{% block title %}Categories{% endblock %}
+{% block body %}
+<div class=" px-6 py-12 bg-gray-200 rounded-xl">
+    <h2 class="mb-12 text-xl text-center" >Categories</h2>
+    
+<div class="grid grid-cols-3 gap-3">
+{% for category in categories %}
+<div>
+    <a href=" {% url 'category_view' category.id %}">
+        <div class="p-6 m-6 bg-[#f4f7f5] rounded-xl">
+            <h2 class="text-2xl">{{ category.name }}</h2>
+            <h3 class="text-gray-500">{{ category.products.count }} Item(s)</h3>
+        </div>
+    </a>
+</div>
+{% endfor %}
+</div>
+</div>
+ 
+{% endblock %}

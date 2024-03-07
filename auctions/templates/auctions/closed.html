@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class=" px-6 py-12 bg-gray-200 rounded-xl">
+    <h2 class="mb-12 text-xl text-center" >Closed Listings</h2>
+    <div>
+        
+<div class="grid grid-cols-3 gap-3">
+{% for listing in listings %}
+<div>
+    <a href="{% url 'listing' listing.id %}">
+        <div class="p-6 m-6 bg-[#f4f7f5] rounded-xl">
+            <img src="{{ listing.image.url }}" alt="" class="rounded-xl max-w-xs">
+            <h3 class="text-sm">{{ listing.name }}</h3>
+            <p class="text-sm">${{ listing.price }}</p>
+            <p class="text-sm">Created {{ listing.created_at}}</p>
+            {% for bid in bids %}
+            {% if bid.item == listing.name and  listing.placed_bid == bid.price %}
+            <p class=" px-6 py-3 text-xl font-bold text-[#4B72E7]">Your bid won!</p>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </a>
+</div>
+{% endfor %}
+</div>
+</div>
+ 
+{% endblock %}

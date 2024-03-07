@@ -1,0 +1,23 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="px-6 py-12 bg-gray-200 rounded-xl">
+<h1 class="m-6 text-3xl">Create new listing</h1>
+
+    <form action="{% url 'new' %}" method="post" enctype="multipart/form-data" id="form1">
+    {% csrf_token %}
+    <div class="space-y-4"></div>
+    {{ form.as_p }}
+
+{% if form.errors or form.non_field_errors %}
+<div class="mb-3 p-6 bg-red-100 rounded-xl">
+    {% for field in form %}
+    {{ field.errors }}
+    {% endfor %}
+    {{ form.non_field_errors }}
+</div>
+{% endif %}
+ <button class="mb-6 py-4 px-8 text-lg bg-[#4B72E7] hover:bg-[#2947A3] rounded-xl text-white" >Create listing</button>
+</form>
+</div>
+ {% endblock %}

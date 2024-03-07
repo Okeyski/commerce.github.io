@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="p-0">
+        <nav
+        class="p-6 flex flex-wrap justify-between items-center bg-gray-200 border-b border-grey-200 mb-6">
+        <a href="/" class=" px-6 py-3 text-2xl font-bold text-[#4B72E7]">Auctions</a>
+        <div class="space-x-6">
+            {% if user.is_authenticated %}
+                <a href="{% url 'categories' %}" class="px-6 py-3 text-sm font-semibold text-white bg-black rounded-full">Categories</a>
+                <a href="{% url 'new' %}" class="px-6 py-3 text-sm font-semibold text-white bg-black rounded-full">Create Listing</a>
+                <a href="{% url 'closed' %}" class="px-6 py-3 text-sm font-semibold text-white bg-black rounded-full">Closed Listings</a>
+                <a href="{% url 'watchlist' request.user.id %}" class="px-6 py-3 text-sm font-semibold text-white bg-black rounded-full">Watchlist</a>
+                <a href="{% url 'logout' %}" class="px-6 py-3 text-sm font-semibold text-white bg-black rounded-full">Log out </a>
+            {% else %}
+                <a href="{% url 'register' %}" class="px-6 py-3 text-sm font-semibold text-white bg-[#5F6062] hover:bg-gray-600 rounded-full">Register</a>
+                <a href="{% url 'login' %}" class="px-6 py-3 text-sm font-semibold text-white bg-black rounded-full">Log in </a>
+            {% endif %}
+        </div>
+        <div>
+            {% if user.is_authenticated %} Signed in as
+                <strong>{{ user.username }}</strong>. {% else %} Not signed in. {% endif%}
+        </div>
+        </nav>
+        <hr />
+        {% block body %} {% endblock %}
+        <footer class="p-6 flex justify-between bg-gray-800">
+            <div class="w-full">
+                <h3 class="mb-5 font-semibold text-white text-center">Created by Okechukwu Onah</h3>
+            </div>
+        </footer>
+    </body>
+</html>
+                 
